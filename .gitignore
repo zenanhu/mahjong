@@ -1,5 +1,38 @@
-
 .nx/installation
 .nx/cache
 .nx/workspace-data
 .DS_Store
+vite.config.*.timestamp*
+
+# Dependencies
+node_modules
+.pnpm-store
+
+# Nx / Build outputs
+/dist
+/.nx/cache
+/.nx/workspace-data
+
+# IDEs and Editors
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Testing
+/coverage
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# OS files
+.DS_Store
+Thumbs.db
