@@ -2,8 +2,8 @@ import { IsString } from 'class-validator';
 
 export class User {
   @IsString()
-  id: string;
+  id!: string;
 
   @IsString()
-  username: string;
+  username!: string;
 }
