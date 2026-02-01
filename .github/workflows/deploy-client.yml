@@ -9,7 +9,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       pages: write
       id-token: write
 
@@ -32,6 +32,12 @@ jobs:
           REPO=${GITHUB_REPOSITORY#*/}
           echo "VITE_BASE=/$REPO/" >> $GITHUB_ENV
           npx nx build client --configuration=production
+          echo "---- build dist listing ----"
+          pwd
+          echo "[dist]" && ls -la ./dist || true
+          echo "[dist/apps]" && ls -la ./dist/apps || true
+          echo "[dist/apps/client]" && ls -la ./dist/apps/client || true
+          echo "[disk usage dist/apps/client]" && du -sh ./dist/apps/client || true
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
