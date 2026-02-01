@@ -38,6 +38,16 @@ jobs:
           echo "[dist/apps/client]" && ls -la ./dist/apps/client || true
           echo "[disk usage dist/apps/client]" && du -sh ./dist/apps/client || true
 
+      - name: Verify build output
+        run: |
+          if [ ! -d ./dist/apps/client ]; then
+            echo "ERROR: build output ./dist/apps/client is missing"
+            echo "Contents of ./dist:" && ls -la ./dist || true
+            exit 1
+          fi
+          echo "Build output exists. Listing:" && ls -la ./dist/apps/client
+          echo "Index.html preview:" && sed -n '1,40p' ./dist/apps/client/index.html || true
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
