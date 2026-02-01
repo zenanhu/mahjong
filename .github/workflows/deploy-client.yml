@@ -30,8 +30,7 @@ jobs:
       - name: Prepare Vite base and build
         run: |
           REPO=${GITHUB_REPOSITORY#*/}
-          echo "VITE_BASE=/$REPO/" >> $GITHUB_ENV
-          npx nx build client --configuration=production
+          VITE_BASE=/$REPO/ npx nx build client --configuration=production
           echo "---- build dist listing ----"
           pwd
           echo "[dist]" && ls -la ./dist || true
