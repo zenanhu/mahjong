@@ -1,0 +1,40 @@
+name: Deploy Client to GitHub Pages
+
+on:
+  push:
+    branches: [ "production" ]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Prepare Vite base and build
+        run: |
+          REPO=${GITHUB_REPOSITORY#*/}
+          echo "VITE_BASE=/$REPO/" >> $GITHUB_ENV
+          npx nx build client --configuration=production
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist/apps/client
