@@ -20,7 +20,7 @@ export function App() {
 
   return (
     <div>
-      {"hello!"}
+      {"Hello!"}
       {user?.username ?? 'no user'}
     </div>
   );

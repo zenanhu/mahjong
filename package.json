@@ -17,6 +17,7 @@
     "@vitest/ui": "^4.0.0",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.0.0",
+    "gh-pages": "^6.3.0",
     "jiti": "2.4.2",
     "jsdom": "~22.1.0",
     "jsonc-eslint-parser": "^2.1.0",
@@ -34,5 +35,9 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "reflect-metadata": "^0.2.2"
+  },
+  "scripts": {
+    "build:client": "npx nx build client --base=/mahjong/",
+    "deploy": "npm run build:client && touch dist/apps/client/.nojekyll && gh-pages -d dist/apps/client -t"
   }
 }
